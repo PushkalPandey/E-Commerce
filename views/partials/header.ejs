@@ -1,0 +1,19 @@
+<div class="nav">
+<h2>Welcome, <%= myname %></h2>
+<% if(isAuth) { %>
+    <a class="updatePass-btn" href="/user/password/" >Update Password</a>
+    <span><a href="/" id="home-page" class="home-page">HOME</a></span>
+    <span><a href="/user/cart/" id="cart-page">CART</a></span>
+    <form class="logout-btn btn" method="GET"  action="/user/logout" >
+        <button class="logout" type="submit" name="logout" value="Logut">Logut</button>   
+    </form>
+    <% }else{ %>
+        <a href="/user/login">
+            <button class="logout btn"  name="login" value="Login">Login</button>
+         </a>
+        
+        <% } %>
+<br/>
+<hr>
+</div>
+

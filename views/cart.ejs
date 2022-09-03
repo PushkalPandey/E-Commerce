@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CART</title>
+    <link rel="stylesheet" href="/styles/cart.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <%- include("partials/header.ejs",{ myname:username,myproducts:products }) %>
+
+ <div id="modal" class="modal" role="dialog">
+        <div id="modal-content" class="modal-content">
+          <span class="close">&times;</span>
+          <div id="written-content">
+  
+          </div>
+        </div>
+      </div>
+
+        <div class="products">
+            <% if(products.length===0) { %>
+                <h2>Nothing to see here, Add Items First!</h2>
+                <% } else{ %>
+            <% products.forEach(function(product,i){ %>
+
+                <div class="box">
+                    <p clas="name">
+                        <%= product.productName %>
+                    </p>
+
+                    <img src="<%= product.productImg %>" alt="Product Image">
+
+                    <p>Price:-£<%= product.productPrice %>
+                    </p>
+                    <p id="tot<%= product.productId %>">Total Price:- £<%= product.productPrice* product.productQuantity %> </p>
+                    <div>
+                        <button id="add<%= product.productId %>" onclick="add()">+</button>
+                        <p class="quantity" id="quant<%= product.productId %>">
+                            <%= product.productQuantity %>
+                        </p>
+                        <button id="reduce<%= product.productId %>" onclick="reduce()">-</button>
+                        <form action="/user/deleteItem" method="POST">
+                            <button id="delete<%= product.productId %>" name="item" value="<%= product.productId %>">Delete</button>
+                        </form>
+
+                        <button id="view<%= product.productId %>"   onclick="viewDesc()" >View</button>
+                       
+                    </div>
+                </div>
+
+                <% }) %>
+                <% } %>
+        </div>
+
+</body>
+
+
+<script src="/scripts/script.js" type="text/javascript"></script> 
+
+
+
+
+    
+
+
+
+</html>

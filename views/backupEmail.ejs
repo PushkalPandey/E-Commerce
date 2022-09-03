@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup-Email</title>
+    <link rel="stylesheet" href="/styles/backupEmail.css">
+</head>
+<body>
+    <form method="post" action="/user/forgetPassword">
+        <div class="form-field">
+    
+            <label for="emails">Enter Your Registered Email</label>
+        </div>
+        <div class="form-field">
+    
+            <input name="email" placeholder="Email Address"/>
+        </div>
+    
+        <div class="form-field">
+    
+            <input class="btn"type="submit" value="Reset Password"/>
+        </div>
+        
+        
+        
+        
+      </form>
+      <% if(err) { %>
+        
+        <h4><%= err %> </h4>
+        <% } %>
+</body>
+</html>

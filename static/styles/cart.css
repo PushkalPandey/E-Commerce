@@ -1,0 +1,153 @@
+body{
+  margin:0;
+  padding:0;
+ 
+  background-image: url(/images/indexbg.jpg);
+  background-size: cover;
+background-repeat: no-repeat;
+/* backdrop-filter: blur(10px); */
+font-family: lato,sans-serif;
+
+  color:rgb(195,240,205);
+}
+
+body::-webkit-scrollbar{
+    display:none;
+  }
+
+
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+       /* The Modal (background) */
+.modal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 80%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  
+}
+#written-content{
+    background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+    
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav{
+    color:#05396B;
+    display:flex;
+    background-color:none;
+    align-items:center;
+    justify-content: right;
+}
+
+.nav *{
+    margin: 10px;
+    float: left;
+  }
+
+  button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 auto;
+    padding: .9rem 2.5rem;
+    text-align: center;
+    background-color: #47ab11;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.16);
+    font-size: 17px;
+  }
+
+
+
+#cart-page {
+    display: none;
+}
+
+
+.products{
+    display: flex;
+ width: 100%;
+
+ flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  
+  
+  /* border: 1px solid black; */
+  
+
+}
+
+.box{
+    margin:5px;
+    padding:2rem;
+   
+     min-width: 20%;
+     height: 390px;
+     /* min-height: 40%; */
+     
+     background-color:#053a6ba0;
+     
+     
+     overflow: auto;
+     border-color: transparent;
+     border-radius: 2rem;
+     height: 18rem;
+     width: 10rem;
+     box-shadow: rgb(0 0 0 / 10%) 19px 15px 19px 5px;
+     
+     box-sizing: content-box;
+ }
+.box img{
+ width: 90%;
+}
+
+.box::-webkit-scrollbar{
+    display:none;
+  }
+
+
+   .modal{
+    color:#237C78;
+  }

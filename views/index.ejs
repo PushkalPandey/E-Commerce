@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomePage</title>
+  <link rel="stylesheet" href="styles/indexStyle.css">
+
+</head>
+
+<body>
+  <%- include("partials/header.ejs",{ myname:username,}) %>
+
+    <h1 class="page-heading">HI THIS IS HOME</h1>
+
+    <div id="modal" class="modal" role="dialog">
+      <div id="modal-content" class="modal-content">
+        <span class="close">&times;</span>
+        <div id="written-content">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="products" id="products">
+
+
+    </div>
+
+    <button class="button" id="loadMore" onclick="getData()">Load More</button>
+
+
+
+
+</body>
+<script>
+
+  // Starting position to get new records
+  var startFrom = 0;
+  var productData = {};
+
+  window.addEventListener("load", function () {
+    // Calling the function on page load
+    getData();
+  });
+
+
+  function getData() {
+
+
+    var request = new XMLHttpRequest();
+
+    request.open("post", "/loadMore");
+    request.setRequestHeader("Content-type", "application/json")
+    var body = { startFrom: startFrom }
+    console.log(body);
+    request.send(JSON.stringify(body));
+
+
+    request.addEventListener("load", function () {
+      console.log(request);
+      var data = JSON.parse(request.responseText);
+      console.log(data);
+      var html = "";
+
+      // Appending all returned data in a variable called html
+      for (var a = 0; a < data.length; a++) {
+        productData[data[a]._id] = data[a];
+        console.log(data[a].images_list);
+        html += "<div class='box'>";
+        html += "<p>" + data[a].title + "</p>";
+
+
+        html += `<img src= ${data[a].images_list[0]} alt=Product>`
+        html += `<button id="btn${data[a]._id}" onclick="viewDesc()" >View</button>`
+
+        html += "</div>";
+      }
+      // Appending the data below old data in <tbody> tag
+      document.getElementById("products").innerHTML += html;
+
+      // number of records you want to show per page
+      var limit = 5;
+
+      // Incrementing the offset so you can get next records when that button is clicked
+      startFrom = startFrom + limit;
+
+      console.log(productData)
+
+    })
+  }
+
+  function viewDesc() {
+    var id = event.target.id.replace('btn', '');
+    console.log(productData[id]);
+    console.log(event.target.id.replace('btn', ''));
+    var modal = document.getElementById('modal');
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    var writtenContent = document.getElementById("written-content");
+
+
+    writtenContent.innerHTML = `<img src= ${productData[id].images_list[0]} alt=Product>`;
+    writtenContent.innerHTML += `<p>PRICE:-${productData[id].price} </p>`;
+    writtenContent.innerHTML += `<p>Details:-${productData[id].product_details} </p>`;
+    writtenContent.innerHTML += `<button id="cart${productData[id]._id}" onclick="addToCart()" >&#128722;</button>`
+
+
+    modal.style.display = "block";
+
+    span.onclick = function () {
+      console.log("close")
+      modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+
+  }
+
+
+  function addToCart() {
+    var id = event.target.id.replace('cart', '');
+    var name = productData[id].title;
+    var price = productData[id].price;
+    var matches = price.match(/(\d+)/);
+    var price = matches[0] ? matches[0] : 0;
+    var price = parseInt(price);
+    var desc = productData[id].product_details;
+    var image = productData[id].images_list[0];
+    console.log(price);
+    console.log(id)
+
+    var obj = { productId: id, name: name, productDesc: desc, quantity: 1, image: image, price: price };
+    var request = new XMLHttpRequest();
+
+    request.open("post", "/user/addToCart");
+    request.setRequestHeader("Content-type", "application/json")
+    var body = obj
+    console.log(body);
+    request.send(JSON.stringify(body));
+
+
+    request.addEventListener("load", function () {
+      // var data = JSON.parse(request.responseText);
+      console.log(request.responseText);
+      if(request.status === 403) {
+        window.location.href = '/user/login';
+       
+      }
+    })
+
+  }
+
+</script>
+
+</html>

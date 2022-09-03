@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup-Email</title>
+    <link rel="stylesheet" href="/styles/backupEmail.css">
+</head>
+<body>
+    <div class="container">
+    <h2>Verification Mail sent, Go check Your Inbox(or spam)</h2>
+    
+    <label for="emails">Not Recieved Mail? Enter Email for Verification</label>
+    <form method="post" action="/user/resendVerification">
+        <div class="form-field">
+    
+            <label for="emails">Enter Your Registered Email</label>
+        </div>
+        <div class="form-field">
+    
+            <input name="email" placeholder="Email Address"/>
+        </div>
+    
+        <div class="form-field">
+    
+            <input class="btn"type="submit" value="Reset Password"/>
+        </div>
+        
+        
+        
+        
+      </form>
+      <% if(err) { %>
+        
+        <h4><%= err %> </h4>
+        <% } %>
+    </div>
+</body>
+</html>
